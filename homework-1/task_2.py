@@ -4,44 +4,41 @@ class Student:
         self.name = name
         self.age = age
         self.id = id
-        self.subjects =subjects
+        self.subjects = subjects
 
- class Special_Student(Student):                #class inheriting student for specialization#
+class CFGStudent(Student): # Class Inheriting
+     def __init__(self, name, age, id, subjects, spec_name):      # Instantiating of class
+         super().__init__(name, age, id, subjects)
+         self.spec_name = spec_name
+         print(f"  -- Specialisation {spec_name}  -- ")
 
-     def __init__(self,spec_name):             #instantiating class#
-        self.spec_name=spec_name
-        print("specialization "+str(spec_name))
+     def new_subject(self, new_subject):               # Method
+         self.subjects.update(new_subject)
+         print("LIST OF SUBJECTS AFTER ADDING (+)")
+         print(self.subjects)
 
-     def new(self, new_subject):               #method to add new subject#
-         self.new_subject=new_subject
-         ob.subjects.update(new_subject)
-         print("LIST OF SUBJECTS AFTER ADDING")
-         print(ob.subjects)
+     def delete_subject(self, old_subject):              # Method (delete)
+         self.subjects.pop(old_subject)
+         print("LIST OF SUBJECTS AFTER REMOVING (-)")
+         print(self.subjects)
 
-     def delete(self, old_subject):              #method to deleted selected  subject#
-         self.old_subject = old_subject
-         ob.subjects.pop(old_subject)
-         print("LIST OF SUBJECTS AFTER REMOVING")
-         print(ob.subjects)
+     def view_subjects(self):                          # Method to print all subjects
+         subjects = self.subjects.keys()
+         print(f"SUBJECTS WHICH IS TAKEN BY THE STUDENT - {subjects}")
 
-     def subjects(self):                          #method to print all subjects#
-         ob.subjects.update({"java":89})     #since the object has a subject deleted, updating with the deleted subject#
-         subjects=ob.subjects.keys()
-         print("subjects taken by student "+(str(subjects)[9:42]))      #converting dict into string and printing#
-
-     def overall_mark(self):                          #method to find average#
-        sum=0
-        avg=0                                # initializing new variable to store result avg#
-        length=len(ob.subjects)
-        for i in ob.subjects.values():
-            sum=sum+i
-        avg=sum/length                          # Storing result in newly created result variable#
-        print("avg of marks "+str(avg))
+     def overall_mark(self):                          # Method to find average
+        sum = 0
+        avg = 0                                # Initializing
+        length = len(self.subjects)
+        for i in self.subjects.values():
+            sum = sum+i
+        avg = sum/length                          # Storing result in newly created result variable
+        print("average marks  = "+str(avg))
 
 
-ob=Student("pinky",23,1,{"math":100,"python":90, "java":89 })          #passing object to parent 'Student' class#
-oa=Special_Student("software")                                          # passing object to child Specialization class#
-oa.new({"c":76})                                                   #calling add_item method#
-oa.delete("java")                                               # calling remove subject method#
-oa.subjects()                                                    # calling subjects method fo list of subjects#
+ob = Student("pinky", 25, 5, {"SQL": 100, "python": 90, "OOP":  10})
+oa = CFGStudent("ALAN", 30, 87290, {"SQL": 98}, 'data')
+oa.new_subject({"java": 98})
+oa.delete_subject("SQL")
+oa.view_subjects()
 oa.overall_mark()
