@@ -1,5 +1,8 @@
 def search_in_matrix(matrix, target):
-    return [(x, y) for x in range(len(matrix)) for y in range(len(matrix[x])) if matrix[x][y] == target][0]
+    try:
+        return [(x, y) for x in range(len(matrix)) for y in range(len(matrix[x])) if matrix[x][y] == target][0]
+    except IndexError:
+        return (-1, -1)
 
 
 matrix = [
@@ -11,7 +14,4 @@ matrix = [
 ]
 target = 44
 
-try:
-    print(search_in_matrix(matrix, 44))
-except Exception as IndexError:
-    print((-1, -1))
+print(search_in_matrix(matrix, 44))
